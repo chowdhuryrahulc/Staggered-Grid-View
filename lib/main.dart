@@ -125,22 +125,62 @@ class Grid extends StatelessWidget {
 class CardGrid extends StatelessWidget {
   CardGrid({Key? key, required this.list}) : super(key: key);
   List list;
+  // List<cardGridList>? titleList;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRect(
-      child: Column(
-        children: [
-          Text('TITLE'),
-          Text('TITLE'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Icon(Icons.add_road),
-              Icon(Icons.add_road),
-            ],
-          )
-        ],
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              list.word,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(list.defination, style: TextStyle(fontSize: 15)),
+            SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.favorite_border),
+                PopupMenuButton(itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Icon(Icons.edit), Text(' Edit')],
+                    )),
+                    PopupMenuItem(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Icon(Icons.show_chart), Text(' Progress')],
+                    )),
+                    PopupMenuItem(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.add_circle_outline),
+                        Text(' Add to ignored')
+                      ],
+                    )),
+                    PopupMenuItem(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.delete, color: Colors.red),
+                        Text(' Remove')
+                      ],
+                    ))
+                  ];
+                }),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
